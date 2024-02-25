@@ -18,7 +18,7 @@ public class Clouds implements GameDrawable {
 	public Clouds() {
 		clouds = new ArrayList<Clouds.Cloud>();
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < 15; i++) {
 			clouds.add(new Cloud());
 		}
 	}
@@ -48,16 +48,16 @@ public class Clouds implements GameDrawable {
 		
 		private Cloud() {
 			px = new Random().nextInt(800);
-			py = 100 + new Random().nextInt(200);
+			py = new Random().nextInt(350);
 			
-			speed = 0.1 + new Random().nextDouble() * 0.2;
+			speed = 0.1 + py/2000.0;
 			
 			bimg = new BufferedImage(48, 32, BufferedImage.TYPE_INT_ARGB);
 			Graphics2D g2d = bimg.createGraphics();
 			g2d.setColor(new Color(0, 0, 0, 0));
 			g2d.fillRect(0, 0, bimg.getWidth(), bimg.getHeight());
 			
-			g2d.setColor(new Color(255, 255, 255, 50));
+			g2d.setColor(new Color(255, 255, 255, 35));
 			
 			for(int i=0; i<15; i++) {
 				int lobesize = new Random().nextInt(30);
