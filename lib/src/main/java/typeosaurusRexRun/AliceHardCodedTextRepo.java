@@ -1,5 +1,9 @@
 package typeosaurusRexRun;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.util.function.Consumer;
+
 public class AliceHardCodedTextRepo implements TextToWriteRepository {
 	
 	static int letterPointer = 0;
@@ -55,6 +59,16 @@ public class AliceHardCodedTextRepo implements TextToWriteRepository {
 			row = (row + 1)%rows.length;
 			initForRow();
 		}
+	}
+	
+	@Override
+	public Consumer<Graphics> drawConsumer() {
+		return graphics -> {
+			graphics.setColor(Color.orange);
+			graphics.drawString(typed, 50, 500);
+			graphics.setColor(Color.green);
+			graphics.drawString(untyped, 50 + typed.length() * 6, 520);
+		};
 	}
 
 }

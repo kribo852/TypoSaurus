@@ -15,11 +15,11 @@ public class Clouds implements GameDrawable {
 	
 	private List<Cloud> clouds;
 	
-	public Clouds() {
+	public Clouds(int groundLevel) {
 		clouds = new ArrayList<Clouds.Cloud>();
 		
-		for (int i = 0; i < 15; i++) {
-			clouds.add(new Cloud());
+		for (int i = 0; i < 25; i++) {
+			clouds.add(new Cloud(groundLevel));
 		}
 	}
 
@@ -46,9 +46,9 @@ public class Clouds implements GameDrawable {
 		
 		BufferedImage bimg;
 		
-		private Cloud() {
+		private Cloud(int groundLevel) {
 			px = new Random().nextInt(800);
-			py = new Random().nextInt(350);
+			py = new Random().nextInt(groundLevel-75);
 			
 			speed = 0.1 + py/2000.0;
 			

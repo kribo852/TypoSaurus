@@ -1,6 +1,6 @@
 package typeosaurusRexRun;
 
-public interface TextToWriteRepository {
+public interface TextToWriteRepository extends GameDrawable{
 	
 	public String getUntyped();
 	

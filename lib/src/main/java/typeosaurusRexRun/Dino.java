@@ -3,7 +3,7 @@ package typeosaurusRexRun;
 import java.awt.Graphics;
 import java.util.function.Consumer;
 
-public interface Dino {
+public interface Dino extends GameDrawable {
 	
 	double getX();
 

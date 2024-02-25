@@ -14,14 +14,17 @@ import lombok.*;
 
 public class Main {
 	
-	static int screenxsize = 800, screenysize = 600;
+	static int screenxsize = 800, screenysize = 600, groundLevel = 400;
 	static int scoreCounter = 0;
 	static boolean game_over = false;
 	
 	static TextToWriteRepository text = new AliceHardCodedTextRepo();
 	static Dino dino = new TypoSaurus();
-	static JurassicBackground background = new JurassicBackground(screenxsize, screenysize);
-	static Clouds clouds = new Clouds();
+	static JurassicBackground background = 
+			new JurassicBackground(screenxsize, screenysize, groundLevel);
+	static Clouds clouds = new Clouds(groundLevel);
+	
+	static List<GameDrawable> drawables = List.of(background, dino, clouds, text);//ordered list
 	
 	
 	public static void main(String[] args) throws InterruptedException {
@@ -66,23 +69,10 @@ public class Main {
 				BufferedImage.TYPE_INT_ARGB);
 		Graphics graphics = bimg.getGraphics();
 		graphics.setColor(Color.black);
-		graphics.fillRect(0, 0, screenxsize, screenysize);
 		
-		List.of(background.drawConsumer(), clouds.drawConsumer(), 
-				dino.drawConsumer(), drawTextConsumer())
-		.forEach(c -> c.accept(graphics));
+		drawables.forEach(drawable -> drawable.drawConsumer().accept(graphics));
 		graphics.drawString("score: "+ scoreCounter, 100, 550);
 		return bimg;
-	}
-	
-	//Move in to text repositories?
-	public static Consumer<Graphics> drawTextConsumer() {
-		return graphics -> {
-			graphics.setColor(Color.orange);
-			graphics.drawString(text.getTyped(), 50, 500);
-			graphics.setColor(Color.green);
-			graphics.drawString(text.getUntyped(), 50+ text.getTyped().length()*5 , 520);
-		};
 	}
 
 }
